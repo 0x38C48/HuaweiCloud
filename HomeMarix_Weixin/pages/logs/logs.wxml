@@ -1,0 +1,6 @@
+<view class="container">
+  <view wx:for="{{devices}}" wx:key="id">
+    <component is="device-item" device="{{item}}" bind:toggle="onToggle" bind:setmeta="onSetMeta" />
+  </view>
+  <button bindtap="refresh">刷新</button>
+</view>
