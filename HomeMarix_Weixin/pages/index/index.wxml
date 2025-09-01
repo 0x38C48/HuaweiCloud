@@ -18,6 +18,7 @@
       <block wx:else>
         <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        <button bindtap="bindViewTap" class="userinfo-signin"> 登录 </button>
       </block>
     </view>
     <view class="usermotto">
