@@ -60,3 +60,13 @@ page {
 .nickname-input {
   flex: 1;
 }
+
+.userinfo-signin{
+  position:fixed;
+  bottom: 200px;
+  background-color: #72f078;
+}
+
+.userinfo-signin:active {
+  background-color: #45a049; /* 按下时颜色 */
+}
