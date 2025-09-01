@@ -1,4 +1,4 @@
-import requests
+
 import json
 import time
 from datetime import datetime
@@ -23,6 +23,9 @@ class DeviceType(Enum):
 
 
 # IoT模块主类
+
+
+
 class IoTModule:
     def __init__(self, api_port=8081):
         self.api_url = f"http://localhost:{api_port}/api/iot"
@@ -259,4 +262,4 @@ def get_user_devices():
 
 if __name__ == '__main__':
     # 启动IoT模块API服务
-    app.run(port=8081, debug=True)98
+    app.run(port=8081, debug=True)
