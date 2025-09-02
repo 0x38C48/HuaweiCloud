@@ -1,12 +1,17 @@
+<!-- logs.wxml -->
 <view class="container">
-  <text class="title">设备列表</text>
-  <block wx:for="{{devices}}" wx:key="id">
-    <view class="device">
-      <text>{{item.name}} - 状态: {{item.state}}</text>
-      <button bindtap="onToggle" data-id="{{item.id}}">
-        {{item.state === 'on' ? '关闭' : '开启'}}
-      </button>
-      <button bindtap="onSetMeta" data-id="{{item.id}}">设置参数</button>
-    </view>
-  </block>
+  <view class="device-list">
+    <block wx:for="{{devices}}" wx:key="id">
+      <view class="device">
+        <text>{{item.name}}: {{item.status}}  </text>
+        <button class="control-button" data-id="{{item.id}}" bindtap="toggleDeviceStatus">
+          {{item.isOn ? '关闭设备' : '启动设备'}}
+        </button>
+      </view>
+    </block>
+  </view>
+
+  <button class="add-device-button" bindtap="addDevice">
+    添加新设备
+  </button>
 </view>
