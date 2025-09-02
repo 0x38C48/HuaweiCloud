@@ -54,8 +54,7 @@ def delete_device(device_id: str):
 @app.route('/api/devices/view', methods=['GET'])
 def show_device():
     try:
-        data = request.json
-        return jsonify(manager.list_devices(data["type"]))
+        return jsonify(manager.list_devices())
     except Exception as e:
         logging.error(f"Control error: {str(e)}", exc_info=True)
         return jsonify({
