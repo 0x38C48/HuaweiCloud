@@ -1,42 +1,62 @@
-// logs.js
 Page({
-    data: {
+  data: {
+    token: '',
+    username: '',
+    password: '',
+    devices: []
+  },
+
+  onLoad() {
+    this.initDevices();
+    this.simulateUpdates();
+  },
+
+  // 初始化设备
+  initDevices() {
+    this.setData({
       devices: [
-        { id: 1, name: '设备1', status: '未启动', isOn: false },
-        { id: 2, name: '设备2', status: '未启动', isOn: false }
-      ],
-    },
-  
-    // 切换设备的状态
-    toggleDeviceStatus: function (e) {
-        const deviceId = e.target.dataset.id; // 获取设备的 id
-        const devices = this.data.devices.map(device => {
-          if (device.id === deviceId) {
-            device.isOn = !device.isOn;
-            device.status = device.isOn ? '已启动' : '已关闭';
-          }
-          return device;
-        });
-      
-        this.setData({
-          devices: devices
-        });
-    },
-      
-  
-    // 添加新设备
-    addDevice: function () {
-      const newDeviceId = this.data.devices.length + 1;  // 新设备 ID
-      const newDevice = {
-        id: newDeviceId,
-        name: `设备${newDeviceId}`,
-        status: '未启动',
-        isOn: false
-      };
-  
-      this.setData({
-        devices: [...this.data.devices, newDevice]  // 将新设备添加到设备列表
+        { id: 1, name: '灯泡', state: 'off' },
+        { id: 2, name: '风扇', state: 'off' },
+        { id: 3, name: '空调', state: 'off' }
+      ]
+    });
+  },
+
+  // 模拟实时更新
+  simulateUpdates() {
+    setInterval(() => {
+      const devices = this.data.devices.map(d => {
+        if (Math.random() > 0.7) {
+          d.state = d.state === 'on' ? 'off' : 'on';
+        }
+        return d;
       });
-    },
-  });
-  
+      this.setData({ devices });
+    }, 5000);
+  },
+
+  // 登录表单输入
+  onUsernameInput(e) { this.setData({ username: e.detail.value }); },
+  onPasswordInput(e) { this.setData({ password: e.detail.value }); },
+
+  // 登录
+  login() {
+    const { username, password } = this.data;
+    if (username === 'demo' && password === 'demo') {
+      this.setData({ token: 'local-token-123' });
+      wx.showToast({ title: '登录成功', icon: 'success' });
+    } else {
+      wx.showToast({ title: '用户名或密码错误', icon: 'none' });
+    }
+  },
+
+  // 切换设备状态
+  onToggle(e) {
+    const id = e.currentTarget.dataset.id;
+    const devices = this.data.devices.map(d => {
+      if (d.id === id) d.state = d.state === 'on' ? 'off' : 'on';
+      return d;
+    });
+    this.setData({ devices });
+  }
+});
